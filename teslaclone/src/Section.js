@@ -1,24 +1,24 @@
 import React from 'react'
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-function Section() {
+function Section(props) {
     return (
-        <Container>
+        <Container bgImage = {props.image}>
             <Item>
                 <ItemText>
-                    <h1>Model-S</h1>
-                    <p>Order Online for Touchless Delivery</p>
+                    <h1>{props.title}</h1>
+                    <p>{props.description} <Span>{props.description_span}</Span></p>
                 </ItemText>
                 <FlexBox>
                     <Buttons>
 
                         <Leftbutton>
-                            custom order
+                            {props.leftbtn}
                         </Leftbutton>
 
-                        <Rightbutton>
-                            existing inventory
-                        </Rightbutton>
+                        {props.rightbtn && <Rightbutton>
+                            {props.rightbtn}
+                        </Rightbutton>}
                     </Buttons>
 
                     <Image src="images/down-arrow.svg" alt="Image" />
@@ -38,7 +38,7 @@ const Container = styled.div`
     width:100%;
     background-position:center;
     background-size: cover;
-    background-image: url("images/model-s.jpg") ;
+    background-image: ${props => `url("images/${props.bgImage}")`} ;
     background-repeat: no-repeat;
 `
 
@@ -47,6 +47,7 @@ const Item = styled.div`
     padding:100px 0 0 0;
     width:400px;
     height:100vh;
+    text-transform:upperCase;
     ${'' /* background-color:orange; */}
     display:flex;
     flex-direction:column;
@@ -56,13 +57,22 @@ const Item = styled.div`
 `
 
 const ItemText = styled.div`
-    
+    line-height:40px;
+`
+const Span = styled.span`
+    ${'' /* dispay:block-inline; */}
+    text-decoration:underline;
+    cursor:pointer;
+    color:rgba(123,30,90);
 `
 
 const Buttons = styled.div`
     text-transform:uppercase;
     display:flex;
-
+    flex-direction:row;
+    @media only screen and (max-width: 768px){
+        flex-direction:column;
+    }
 `
 
 const Leftbutton = styled.div`
@@ -78,6 +88,10 @@ const Leftbutton = styled.div`
     color:#fff;
     font-weight:bolder;
     margin: 30px 10px;
+
+    @media screen and (max-width: 768px){
+        margin: 10px 0;
+    }
 `
 
 const Rightbutton = styled(Leftbutton)`
