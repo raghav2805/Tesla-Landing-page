@@ -1,16 +1,28 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from "styled-components";
 import './Header.css'
 import MenuIcon from '@material-ui/icons/Menu';
-
-// const useStyles = makeStyles({
-//     root:{
-//         backgroundColor:red
-//     }
-// });
+import Write from "./display"; 
+import CloseIcon from '@material-ui/icons/Close';
 
 function Header() {
-    // const classes = useStyles();
+    const [burger,setBurger] = useState(false);
+
+    const [normal,setNormal] = useState(["Existing Inventory",
+    "Used Inventory",
+    "Trade-In",
+    "Test Drive",
+    "Cybertruck",
+    "Roadster",
+    "Semi",
+    "Charging",
+    "Powerwall",
+    "Commercial Energy",
+    "Utilities",
+    "Find Us",
+    "Support",
+    "Investor Relations"]);
+
     return (
         <Component>
             <Logo>
@@ -31,8 +43,15 @@ function Header() {
             <Shop>
                 <Span>Shop</Span>
                 <Span>Account</Span>
-                {/* <MenuIcon classNme = {mergeClasses.root} /> */}
-                <CustomMenu />
+                <CustomMenu onClick= {() => setBurger(true)}/>
+
+                {burger && <Wrap>
+                    <CustomClose onClick = {()=> setBurger(false)} />
+                    {normal.map( (display,index) =>(
+                        <Write key = {index} display = {display}/> 
+                    ) )}
+                </Wrap>}
+
             </Shop>
         </Component>
     )
@@ -49,6 +68,7 @@ const Component = styled.div`
     display:flex;
     justify-content:space-between;
     align-items:center;
+    z-index: 1;
 `
 
 const Logo = styled.div`
@@ -62,9 +82,8 @@ const Logo = styled.div`
 
 const Menu = styled.div`
     min-width:500px;
-    background-color:orange;
-    
-    @media(max-width: 768px){
+
+    @media(max-width: 988px){
         display:none;
     }
 `
@@ -73,13 +92,34 @@ display:flex;
 justify-content:space-around;
 max-width:100px;
 min-width:200px;
+
 align-items:center;
 `
 
 const Span = styled.div`
-    
+    cursor:pointer;
 `
 
 const CustomMenu = styled(MenuIcon)`
     cursor:pointer;
+`
+
+const Wrap = styled.div`
+    background-color:#fff;
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    display:flex;
+    width:200px;
+    flex-direction:column;
+    justify-content:space-around;
+    padding:40px 0;
+    z-index:10;
+`
+
+const CustomClose = styled(CloseIcon)`
+    position:fixed;
+    top:10px;
+    right:10px;
 `

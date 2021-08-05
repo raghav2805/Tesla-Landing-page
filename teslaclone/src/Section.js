@@ -1,31 +1,39 @@
 import React from 'react'
 import styled from "styled-components";
+import Fade from 'react-reveal/Fade';
 
 function Section(props) {
     return (
-        <Container bgImage = {props.image}>
+        <Container bgImage={props.image}>
+
             <Item>
                 <ItemText>
-                    <h1>{props.title}</h1>
-                    <p>{props.description} <Span>{props.description_span}</Span></p>
+                    <Fade bottom>
+
+                        <h1>{props.title}</h1>
+                        <p>{props.description} <Span>{props.description_span}</Span></p>
+                    </Fade>
                 </ItemText>
+
                 <FlexBox>
-                    <Buttons>
+                    <Fade bootom>
+                        <Buttons>
 
-                        <Leftbutton>
-                            {props.leftbtn}
-                        </Leftbutton>
+                            <Leftbutton>
+                                {props.leftbtn}
+                            </Leftbutton>
 
-                        {props.rightbtn && <Rightbutton>
-                            {props.rightbtn}
-                        </Rightbutton>}
-                    </Buttons>
+                            {props.rightbtn && <Rightbutton>
+                                {props.rightbtn}
+                            </Rightbutton>}
+                        </Buttons>
 
-                    <Image src="images/down-arrow.svg" alt="Image" />
-                    
+                        <Image src="images/down-arrow.svg" alt="Image" />
+                    </Fade>
                 </FlexBox>
 
             </Item>
+
         </Container>
     )
 }
@@ -48,7 +56,6 @@ const Item = styled.div`
     width:400px;
     height:100vh;
     text-transform:upperCase;
-    ${'' /* background-color:orange; */}
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -60,7 +67,6 @@ const ItemText = styled.div`
     line-height:40px;
 `
 const Span = styled.span`
-    ${'' /* dispay:block-inline; */}
     text-decoration:underline;
     cursor:pointer;
     color:rgba(123,30,90);

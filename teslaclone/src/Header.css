@@ -12,4 +12,9 @@ ul{
 }
 li{
     list-style:none;
+    cursor:pointer;
+}
+
+li:hover{
+    color:purple;
 }
